@@ -19,7 +19,7 @@ int main() {
     srand(time(nullptr));
 
     //writing
-    const int n = 15;
+    const int n = 10;
     std::fstream file("binJournal.bin", std::ios::out | std::ios::binary);
     if (file) {
          
