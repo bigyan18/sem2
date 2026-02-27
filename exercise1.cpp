@@ -4,6 +4,7 @@
 #include <cstdlib>//rand(), srand()
 #include <iomanip>  //for setw()
 #include <filesystem>//C++17+ for filesize
+// UPDATED ON FEB 27 - test change to force update
 namespace fs = std::filesystem;  
 //using namespace std;
 
@@ -18,11 +19,11 @@ int main() {
     srand(time(nullptr));
 
     //writing
-    const int n = 10;
+    const int n = 15;
     std::fstream file("binJournal.bin", std::ios::out | std::ios::binary);
     if (file) {
          
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 1; i <= n; i++) {
         BinaryJournal j;
         j.id    = i;
         j.value = rand() % 100;           //0–99
@@ -41,6 +42,7 @@ int main() {
     std::fstream fin("binJournal.bin", std::ios::in | std::ios::binary);
     if (!fin) {
         std::cout << "Error opening file for reading\n";
+        return 1;
     }
 
     //header
@@ -53,7 +55,7 @@ int main() {
 
     std::cout << std::string(30, '-') << "\n";
 
-    for (int i = 0; i <=n; ++i) {
+    for (int i = 1; i <=n; i++) {
         BinaryJournal j;
         fin.read(reinterpret_cast<char*>(&j), sizeof(BinaryJournal));
 
